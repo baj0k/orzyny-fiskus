@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <title>OCR</title>
+    </head>
+    <body >
+        <div class="container">
+            <div class="form-container">
+                <p style="color: red;">{{message}}</p>
+                <h1>
+                    Wrzuć paragon
+                </h1>
+                <form method="POST" enctype=multipart/form-data>
+                    {% csrf_token %}
+                    <label> Dodaj zdjęciie:</label>
+                    <input type="file" class="form-control" id="image" name="image" />
+                    <button class="button-primary" type="submit" >Submit</button>
+                </form>
+                <label><h2>Wynik:</h2></label>
+                <span class="textarea" role="textbox" contenteditable>{{text}}</span>
+            </div>
+        </div>
+    </body>
