@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2 style="text-align: center;">Ocr Result</h2>
+        <hr>
+
+    <!-- Display Results -->
+    {% if success %}
+
+
+    <p>This is the section where you can enter the translations. The placeholder value shows the current translations. Users can add their own translations and then press on Save Translations.</p>
+
+    <!-- Table to Display the original sentence and take the input of the translation -->
+    <table style="display: relative;" class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Original Sentence</th>
+            <th scope="col">Translation</th>
+          </tr>
+        </thead>
+        <form name="translated-text-form" class="form-control" action="" method="post">
+            {% csrf_token %}
+            <tbody>
+
+                {% for sentence in text %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td style="width: 50%;">{{ sentence }}</td>
+                    <td style="width: 50%;"><textarea style="width:100%" placeholder="popraw"></textarea></td>
+
+
+                </tr>
+                {% endfor %}
+
+                <tr>
+                    <td style="display: absolute; left: auto; right: auto; bottom: 10px;" colspan="2">
+                        <br>
+                        <p style="text-align: right;">
+                            <input class="btn btn-secondary" type="submit" value="Save Translations"/>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </form>
+      </table>
+
+    {% else %}
+
+    <h2>No results found for the entry: {{ project.article_title }}</h2>
+    <br>
+    <h3>Please try again with a different search term.</h3>
+
+    {% endif %}
+
+</body>
+</html>

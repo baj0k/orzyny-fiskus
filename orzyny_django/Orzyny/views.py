@@ -10,10 +10,11 @@ from django.conf import settings
 
 
 # Create your views here.
-def index(request):
-    text = ""
-    message = ""
-    if request.method == 'POST':
+class Index(View):
+    def get(self,request):
+        return render(request, "formpage.html")
+    def post(self,request):
+        text = ""
         form = ImageUpload(request.POST, request.FILES)
         if form.is_valid():
             # try:
@@ -29,9 +30,6 @@ def index(request):
             os.remove(pathz)
             # except:
             #     message = "check your filename and ensure it doesn't have any space or check if it has any text"
+        return render(request, 'result.html', {'text': text})
 
-    context = {
-        'text': text,
-        'message': message,
-    }
-    return render(request, 'formpage.html', context)
+
